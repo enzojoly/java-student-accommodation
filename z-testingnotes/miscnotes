@@ -1,0 +1,23 @@
+Main files renamed and placed in .model
+
+private void initializeHalls() {
+        // Managers for each hall
+        Manager breconManager = new Manager("John Doe", "0123456789", 1001);
+        Manager cotswoldManager = new Manager("Jane Smith", "9876543210", 1002);
+        Manager mendipManager = new Manager("Emily Jones", "1234567890", 1003);
+        Manager quantockManager = new Manager("Michael Brown", "0987654321", 1004);
+
+        // Initialize halls with managers
+        halls.add(new Hall("Brecon", breconManager));
+        halls.add(new Hall("Cotswold", cotswoldManager));
+        halls.add(new Hall("Mendip", mendipManager));
+        halls.add(new Hall("Quantock", quantockManager));
+
+        // Initialize accommodations for each hall
+        halls.forEach(hall -> {
+            IntStream.rangeClosed(1, 30).forEach(i -> hall.addAccommodation(
+                new Accommodation(hall.getAccommodationNumber() + " Room " + i, AccommodationType.STANDARD, 700, "Standard Accommodation", CleaningStatus.CLEAN, new ArrayList<>())));
+            IntStream.rangeClosed(31, 40).forEach(i -> hall.addAccommodation(
+                new Accommodation(hall.getAccommodationNumber() + " Room " + i, AccommodationType.SUPERIOR, 750, "Superior Accommodation", CleaningStatus.CLEAN, new ArrayList<>())));
+        });
+    }

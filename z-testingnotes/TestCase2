@@ -1,0 +1,57 @@
+Though there should be five accommodation tests to test for both Getters at the same time this was unnecessary given that TestCase1 provided us with enough evidence that getOccupancyStatus() was working correctly.
+
+    public AvailabilityStatus getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+
+    ACCOMMODATION 101
+ - Availability: UNAVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: OCCUPIED
+
+    ACCOMMODATION 102
+ - Availability: AVAILABLE
+ - Cleaning Status: OFFLINE
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 103
+ - Availability: AVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 104
+ - Availability: UNAVAILABLE
+ - Cleaning Status: DIRTY
+ - Occupancy Status: OCCUPIED
+ - Type: SUPERIOR
+
+----------------------------------------------------------------------------
+    public AvailabilityStatus getAvailabilityStatus() {
+	    if (this.rentalAgreement != null) {
+		    return AvailabilityStatus.UNAVAILABLE;
+	    } else if (this.cleaningStatus != CleaningStatus.CLEAN) {
+		    return AvailabilityStatus.UNAVAILABLE;
+	    } else {
+		    return AvailabilityStatus.AVAILABLE;
+	    }
+
+    ACCOMMODATION 101
+ - Availability: UNAVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: OCCUPIED
+
+    ACCOMMODATION 102
+ - Availability: UNAVAILABLE
+ - Cleaning Status: OFFLINE
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 103
+ - Availability: AVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 104
+ - Availability: UNAVAILABLE
+ - Cleaning Status: DIRTY
+ - Occupancy Status: OCCUPIED
+ - Type: SUPERIOR

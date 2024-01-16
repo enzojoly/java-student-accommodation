@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.SystemController">
+   <children>
+      <HBox prefHeight="47.0" prefWidth="1120.0" VBox.vgrow="ALWAYS">
+         <children>
+            <MenuButton fx:id="selectBlock" mnemonicParsing="false" text="Select Block">
+               <items>
+                  <MenuItem fx:id="selectStudentVillage" text="Student Village" />
+               </items>
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+            </MenuButton>
+            <MenuButton fx:id ="selectHall" mnemonicParsing="false" text="Select Hall">
+               <items>
+                    <MenuItem fx:id="selectHallBrecon" text="Brecon" />
+                    <MenuItem fx:id="selectHallCotswold" text="Cotswold" />
+                    <MenuItem fx:id="selectHallMendip" text="Mendip" />
+                  <MenuItem fx:id="selectHallQuantock" text="Quantock" />
+               </items>
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+            </MenuButton>
+            <VBox prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HALL MANAGER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <TextFlow fx:id="displayHallManagerName" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </TextFlow>
+               </children>
+               <HBox.margin>
+                  <Insets left="30.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="276.0" layoutY="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HALL MANAGER TEL.">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <TextFlow fx:id="displayHallManagerTelephone" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </TextFlow>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="476.0" layoutY="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HALL MANAGER EMPLOYEE ID">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <TextFlow fx:id="displayHallManagerID" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </TextFlow>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <SplitPane prefHeight="512.0" prefWidth="1026.0" VBox.vgrow="ALWAYS">
+        <items>
+            <SplitPane dividerPositions="0.2451171875" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="641.0">
+                     <children>
+                        <VBox layoutX="1.0" layoutY="51.0" prefHeight="456.0" prefWidth="248.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="1.0">
+                           <children>
+                              <Label alignment="CENTER" style="&#10;" text="Accommodation" textAlignment="CENTER" underline="true" wrapText="false">
+                                 <font>
+                                    <Font size="24.0" fx:id="x11" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="40.0" top="8.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="associatedAccommodationsListSelect" prefHeight="511.0" prefWidth="238.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                 </VBox.margin>
+                              </ListView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="307.0">
+                     <children>
+                        <HBox prefHeight="47.0" prefWidth="770.0">
+                           <children>
+                              <Label alignment="CENTER" style="&#10;" text="Details" textAlignment="CENTER" underline="true" wrapText="false">
+                                 <font>
+                                    <Font size="24.0" fx:id="x111" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="40.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="editDetailsButton" minWidth="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" text="Edit" onAction="#handleEditDetailsAction">
+                                 <HBox.margin>
+                                    <Insets left="50.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <VBox layoutY="286.0" prefHeight="223.0" prefWidth="770.0">
+                           <children>
+                              <HBox prefHeight="49.0" prefWidth="770.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="264.0" style="&#10;" text="Rental Lease Agreement" textAlignment="CENTER" underline="true" wrapText="false">
+                                       <font>
+                                          <Font size="24.0" fx:id="x1111" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="40.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Button fx:id="createLeaseButton" mnemonicParsing="false" text="Create Lease" onAction="#onCreateLeaseClicked">
+                                       <HBox.margin>
+                                          <Insets left="70.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="deleteLeaseButton" mnemonicParsing="false" text="Remove Lease" onAction="#onDeleteLeaseClicked">
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="207.0" prefWidth="770.0">
+                                 <children>
+                                    <HBox prefHeight="14.0" prefWidth="700.0">
+                                       <VBox.margin>
+                                          <Insets left="70.0" top="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FULL NAME:" textOrigin="TOP">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <TextFlow fx:id="displayStudentName" prefHeight="42.0" prefWidth="590.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextFlow>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets left="70.0" top="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="STUDENT ID:" textOrigin="TOP">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <TextFlow fx:id="displayStudentID" prefHeight="21.0" prefWidth="586.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextFlow>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets left="70.0" top="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TELEPHONE:" textOrigin="TOP">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <TextFlow fx:id="displayStudentTelephone" prefHeight="21.0" prefWidth="588.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextFlow>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets left="70.0" top="20.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LEASE NUMBER:" textOrigin="TOP">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <TextFlow fx:id="displayAssociatedLeaseNumber" prefHeight="21.0" prefWidth="558.0">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextFlow>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="14.0" layoutY="47.0" prefHeight="223.0" prefWidth="349.0">
+                           <children>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets left="45.0" top="25.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABILITY:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <TextFlow fx:id="displayAvailabilityStatus" prefHeight="6.0" prefWidth="189.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextFlow>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets left="5.0" top="30.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CLEANING STATUS:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <TextFlow fx:id="displayCleaningStatus" prefHeight="6.0" prefWidth="189.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextFlow>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets left="118.0" top="30.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <TextFlow fx:id="displayAccommodationType" prefHeight="6.0" prefWidth="189.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextFlow>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets left="109.0" top="30.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PRICE:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <TextFlow fx:id="displayPrice" prefHeight="6.0" prefWidth="189.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextFlow>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox layoutX="363.0" layoutY="11.0" prefHeight="259.0" prefWidth="401.0" AnchorPane.leftAnchor="363.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <VBox prefHeight="259.0" prefWidth="187.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="INVENTORY" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefWidth="390.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ListView fx:id="displayInventoryList" prefHeight="511.0" prefWidth="460.0" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="259.0" prefWidth="187.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefWidth="248.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <TextFlow fx:id="displayDescription" prefHeight="318.0" prefWidth="187.0" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </TextFlow>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+        </items>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </SplitPane>
+   </children>
+</VBox>

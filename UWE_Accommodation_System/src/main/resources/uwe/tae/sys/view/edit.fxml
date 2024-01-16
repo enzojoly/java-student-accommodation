@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="518.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Details" textAlignment="CENTER" wrappingWidth="412.66455078125">
+               <font>
+                  <Font size="39.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" right="20.0" top="15.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="0.0" prefWidth="518.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SELECTED HALL:" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextFlow fx:id="displaySelectedHall" prefHeight="42.0" prefWidth="590.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextFlow>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="14.0" prefWidth="700.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOM NUMBER:" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="20.0" top="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextFlow fx:id="displayAccommodationNumber" prefHeight="42.0" prefWidth="590.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextFlow>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="331.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="insertNewHallManagerName" prefWidth="600.0" promptText="Insert new hall manager name...">
+                     <HBox.margin>
+                        <Insets left="50.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="186.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager Tel." textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="insertNewHallManagerTelephone" prefWidth="600.0" promptText="Insert new hall manager telephone...">
+                     <HBox.margin>
+                        <Insets left="18.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="348.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="insertNewHallManagerID" prefWidth="600.0" promptText="Insert new hall manager employee ID...">
+                     <HBox.margin>
+                        <Insets left="55.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="379.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField fx:id="insertNewPrice" prefWidth="600.0" promptText="Insert new price (GBP)...">
+                     <HBox.margin>
+                        <Insets left="112.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="410.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <MenuButton fx:id="setType" mnemonicParsing="false" prefHeight="23.0" prefWidth="392.0" text="Set Type">
+                    <items>
+                      <MenuItem fx:id="selectStandard" mnemonicParsing="false" text="Standard" />
+                      <MenuItem fx:id="selectSuperior" mnemonicParsing="false" text="Superior" />
+                    </items>
+                     <HBox.margin>
+                        <Insets left="110.0" right="20.0" />
+                     </HBox.margin>
+                  </MenuButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="316.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cleaning Status" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <MenuButton fx:id="setStatus" mnemonicParsing="false" prefHeight="23.0" prefWidth="392.0" text="Set Status">
+                     <items>
+                        <MenuItem fx:id="selectClean" mnemonicParsing="false" text="Clean" />
+                        <MenuItem fx:id="selectDirty" mnemonicParsing="false" text="Dirty" />
+                        <MenuItem fx:id="selectOffline" mnemonicParsing="false" text="Offline" />
+                     </items>
+                     <HBox.margin>
+                        <Insets left="28.0" right="20.0" />
+                     </HBox.margin>
+                  </MenuButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="441.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory" textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Button fx:id="setDefaultInventory" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Set default" onAction="#handleDefaultInventory">
+                     <HBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="insertNewInventory" prefWidth="600.0" promptText="Non-default: Cleaning Status will be set to Offline!">
+                     <HBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="50.0" />
+                     </padding>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="155.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desc." textOrigin="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Button fx:id="setDefaultDescription" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Set default" onAction="#handleDefaultDescription">
+                     <HBox.margin>
+                        <Insets left="46.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="insertNewDescription" layoutX="156.0" layoutY="10.0" prefWidth="600.0" promptText="Insert new description...">
+                     <padding>
+                        <Insets bottom="50.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="315.0" prefHeight="31.0" prefWidth="498.0">
+               <children>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Cancel" onAction="#handleCancelAction">
+                     <HBox.margin>
+                        <Insets left="100.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="confirmButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Confirm" onAction="#handleConfirmAction">
+                     <HBox.margin>
+                        <Insets left="20.0" right="100.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

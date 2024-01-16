@@ -1,0 +1,55 @@
+    public OccupancyStatus getOccupancyStatus() {
+        return occupancyStatus;
+    }
+
+    ACCOMMODATION 101
+ - Availability: AVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: OCCUPIED
+
+    ACCOMMODATION 102
+ - Availability: AVAILABLE
+ - Cleaning Status: OFFLINE
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 103
+ - Availability: AVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 104
+ - Availability: AVAILABLE
+ - Cleaning Status: DIRTY
+ - Occupancy Status: OCCUPIED
+ - Type: SUPERIOR
+
+
+------------------------------------
+    public OccupancyStatus getOccupancyStatus() {
+	    if (this.rentalAgreement != null) {
+		    return OccupancyStatus.OCCUPIED;
+	    } else {
+		    return OccupancyStatus.UNOCCUPIED;
+	    }
+    }
+
+    ACCOMMODATION 101
+ - Availability: UNAVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: OCCUPIED
+
+    ACCOMMODATION 102
+ - Availability: AVAILABLE
+ - Cleaning Status: OFFLINE
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 103
+ - Availability: AVAILABLE
+ - Cleaning Status: CLEAN
+ - Occupancy Status: UNOCCUPIED
+
+    ACCOMMODATION 104
+ - Availability: UNAVAILABLE
+ - Cleaning Status: DIRTY
+ - Occupancy Status: OCCUPIED
+ - Type: SUPERIOR
