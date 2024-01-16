@@ -88,7 +88,6 @@ public class LeaseController {
     }
 
 
-    // Event handler for the cancel button
     @FXML
     public void handleCancelAction() {
 	if (enterStudentName != null) {

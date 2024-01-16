@@ -87,7 +87,6 @@ public class EditController {
 
     @FXML
     private void initialize() {
-	    //updateFields(hallName);
 	    setupEventHandlers();
     }
 
@@ -234,7 +233,6 @@ public class EditController {
     public void setUpdateCallback(InformationUpdateCallback updateCallback) {
         this.updateCallback = updateCallback;
     }
-
 
 
 

@@ -271,8 +271,6 @@ public class SystemController implements InformationUpdateCallback {
         } catch (IOException e) {
             e.printStackTrace();
 
-            // Handle the exception appropriately// Display an error message to the user
-//	    showAlert("Error", "An error occurred while opening the window: " + e.getMessage());
         }
     }
 
@@ -294,14 +292,12 @@ public class SystemController implements InformationUpdateCallback {
         } catch (IOException e) {
             e.printStackTrace();
 
-            // Handle the exception appropriately// Display an error message to the user
-//	    showAlert("Error", "An error occurred while opening the window: " + e.getMessage());
         }
     }
 
     @Override
     public void onInformationUpdated(Hall hall, Accommodation accommodation) {
-        // Update the selectedAccommodation and refresh the UI accordingly
+        // Update objects and refresh UI
 	this.selectedHall = hall;
 	this.selectedAccommodation = accommodation;
         refreshDetails(selectedHall, selectedAccommodation);
