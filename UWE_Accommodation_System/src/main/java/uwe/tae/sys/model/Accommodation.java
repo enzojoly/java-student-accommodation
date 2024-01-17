@@ -118,6 +118,8 @@ public class Accommodation {
 		    return AvailabilityStatus.UNAVAILABLE;
 	    } else if (this.cleaningStatus != CleaningStatus.CLEAN) {
 		    return AvailabilityStatus.UNAVAILABLE;
+	    } else if (!inventoryMatchesDefault()) {
+		    return AvailabilityStatus.UNAVAILABLE;
 	    } else {
 		    return AvailabilityStatus.AVAILABLE;
 	    }
