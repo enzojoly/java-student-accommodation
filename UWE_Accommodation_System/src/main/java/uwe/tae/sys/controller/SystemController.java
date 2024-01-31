@@ -107,6 +107,9 @@ public class SystemController implements InformationUpdateCallback {
 	uweSystem = UWE_Accommodation_System.createSystem();
 
         selectHall.setDisable(true);
+	editDetailsButton.setDisable(true);
+	createLeaseButton.setDisable(true);
+	deleteLeaseButton.setDisable(true);
 
 	setupEventHandlers();
 
@@ -147,6 +150,8 @@ public class SystemController implements InformationUpdateCallback {
 	setTextFlowContent(displayHallManagerID, String.valueOf(hall.getManager().getID()));
 	selectedHall = hall;
 	updateAccommodationsList(hall);
+
+	editDetailsButton.setDisable(true);
     }
 
     private void updateAccommodationsList(Hall hall) {
@@ -195,6 +200,9 @@ public class SystemController implements InformationUpdateCallback {
 	String[] parts = accommodationString.split(" ");
 	int accommodationID = Integer.parseInt(parts[1].replace(",", ""));
     	selectedAccommodation = findAccommodationById(accommodationID);
+
+	editDetailsButton.setDisable(false);
+
 
     	refreshDetails(selectedHall, selectedAccommodation);
 

@@ -87,7 +87,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="186.0" prefHeight="31.0" prefWidth="498.0">
                <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager Tel." textOrigin="TOP">
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Tel." textOrigin="TOP">
                      <font>
                         <Font size="18.0" />
                      </font>
