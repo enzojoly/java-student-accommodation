@@ -320,15 +320,38 @@
                         </VBox>
                         <VBox layoutX="14.0" layoutY="47.0" prefHeight="188.0" prefWidth="349.0">
                            <children>
+                              <HBox prefHeight="14.0" prefWidth="700.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOM SELECTED:" textOrigin="TOP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextFlow fx:id="displayAccommodationNumber" prefHeight="42.0" prefWidth="590.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextFlow>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
                               <HBox>
                                  <VBox.margin>
-                                    <Insets left="45.0" top="20.0" />
+                                    <Insets left="45.0" top="25.0" />
                                  </VBox.margin>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AVAILABILITY:">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </Text>
                                     <TextFlow fx:id="displayAvailabilityStatus" prefHeight="6.0" prefWidth="189.0">
                                        <HBox.margin>
@@ -339,7 +362,7 @@
                               </HBox>
                               <HBox>
                                  <VBox.margin>
-                                    <Insets left="5.0" top="20.0" />
+                                    <Insets left="5.0" top="15.0" />
                                  </VBox.margin>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CLEANING STATUS:">
@@ -356,7 +379,7 @@
                               </HBox>
                               <HBox>
                                  <VBox.margin>
-                                    <Insets left="118.0" top="20.0" />
+                                    <Insets left="118.0" top="15.0" />
                                  </VBox.margin>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE:">
@@ -373,7 +396,7 @@
                               </HBox>
                               <HBox>
                                  <VBox.margin>
-                                    <Insets left="109.0" top="20.0" />
+                                    <Insets left="109.0" top="15.0" />
                                  </VBox.margin>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PRICE:">

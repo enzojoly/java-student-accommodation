@@ -91,6 +91,9 @@ public class SystemController implements InformationUpdateCallback {
     private ListView<String> associatedAccommodationsListSelect;
 
     @FXML
+    private TextFlow displayAccommodationNumber;
+
+    @FXML
     private TextFlow displayAvailabilityStatus;
 
     @FXML
@@ -174,6 +177,7 @@ public class SystemController implements InformationUpdateCallback {
     }
 
     private void handleSelectHall(Hall hall) {
+
 	setTextFlowContent(displayHallManagerName, hall.getManager().getName());
 	setTextFlowContent(displayHallManagerTelephone, hall.getManager().getTelephone());
 	setTextFlowContent(displayHallManagerID, String.valueOf(hall.getManager().getID()));
@@ -183,6 +187,10 @@ public class SystemController implements InformationUpdateCallback {
 	editDetailsButton.setDisable(true);
 	createLeaseButton.setDisable(true);
 	deleteLeaseButton.setDisable(true);
+
+
+
+
 	//Null pointer exception for selectedAccommodation as on first boot refreshDetails is called before selectedAccommodation is set
 	try {
 		refreshDetails(selectedHall, selectedAccommodation);
@@ -193,16 +201,19 @@ public class SystemController implements InformationUpdateCallback {
 
     private void updateAccommodationsList(Hall hall) {
 	associatedAccommodationsListSelect.getItems().clear();
+
 	totalRooms = 0;
 	availableRooms = 0;
 	offlineRooms = 0;
 	requireCleaning = 0;
+
 	for (Accommodation accommodation : hall.getAssociatedAccommodations()) {
 
 		// I call this monster the String maker, also it provides total variables for header display
 
-		String displayText = hall.getName() + ", " + accommodation.getID() + ", " + accommodation.getType();
 		totalRooms++;
+
+		String displayText = hall.getName() + ", " + accommodation.getID() + ", " + accommodation.getType();
 
 		if (accommodation.getRentalAgreement() == null) {
 		if (accommodation.getCleaningStatus() == CleaningStatus.CLEAN) {
@@ -225,6 +236,7 @@ public class SystemController implements InformationUpdateCallback {
 			associatedAccommodationsListSelect.getItems().add(displayText + ", Leased to "
 					+ accommodation.getRentalAgreement().getStudent().getID() + ", OFFLINE");
 		// Can a student occupy an offline room? Only if Offline triggered after occupation, apparently.
+		// Do we care if description doesn't match? It won't show on the list
 
 		} else if (accommodation.getCleaningStatus() == CleaningStatus.DIRTY){
 			requireCleaning++;
@@ -233,17 +245,25 @@ public class SystemController implements InformationUpdateCallback {
 		}
 	}
 	}
+	refreshHallSummary();
 	}
+
+    private void refreshHallSummary() {
+	setTextFlowContent(displayTotalRooms, String.valueOf(totalRooms));
+	setTextFlowContent(displayAvailableRooms, String.valueOf(availableRooms));
+	setTextFlowContent(displayOfflineRooms, String.valueOf(offlineRooms));
+	setTextFlowContent(displayRequireCleaning, String.valueOf(requireCleaning));
+    }
+
 
     private void refreshDetails(Hall hall, Accommodation accommodation) {
 	    updateAccommodationsList(hall);
 	setTextFlowContent(displayHallManagerName, hall.getManager().getName());
 	setTextFlowContent(displayHallManagerTelephone, hall.getManager().getTelephone());
 	setTextFlowContent(displayHallManagerID, String.valueOf(hall.getManager().getID()));
-	setTextFlowContent(displayTotalRooms, String.valueOf(totalRooms));
-	setTextFlowContent(displayAvailableRooms, String.valueOf(availableRooms));
-	setTextFlowContent(displayOfflineRooms, String.valueOf(offlineRooms));
-	setTextFlowContent(displayRequireCleaning, String.valueOf(requireCleaning));
+	refreshHallSummary();
+	if (accommodation != null) {
+	setTextFlowContent(displayAccommodationNumber, String.valueOf(accommodation.getID()));
 	setTextFlowContent(displayAvailabilityStatus, (accommodation.getAvailabilityStatus().toString()));
 	setTextFlowContent(displayCleaningStatus, (accommodation.getCleaningStatus().toString()));
 	setTextFlowContent(displayAccommodationType, (accommodation.getType().toString()));
@@ -268,9 +288,11 @@ public class SystemController implements InformationUpdateCallback {
 		setTextFlowContent(displayStudentTelephone, accommodation.getRentalAgreement().getStudent().getTelephone());
 		setTextFlowContent(displayAssociatedLeaseNumber, accommodation.getRentalAgreement().getLeaseNumber());
 	}
+	}
     }
 
     private void refreshOnSelect(Accommodation accommodation) {
+	setTextFlowContent(displayAccommodationNumber, String.valueOf(accommodation.getID()));
 	setTextFlowContent(displayAvailabilityStatus, (accommodation.getAvailabilityStatus().toString()));
 	setTextFlowContent(displayCleaningStatus, (accommodation.getCleaningStatus().toString()));
 	setTextFlowContent(displayAccommodationType, (accommodation.getType().toString()));
@@ -470,9 +492,12 @@ public class SystemController implements InformationUpdateCallback {
     public void onInformationUpdated(Hall hall, Accommodation accommodation) {
         // Update objects and refresh UI
 	this.selectedHall = hall;
+	if (accommodation != null) {
 	this.selectedAccommodation = accommodation;
-        refreshDetails(selectedHall, selectedAccommodation);
         System.out.println("Callback triggered with accommodation ID: " + accommodation.getID());
+	} else {         System.out.println("Callback triggered with selected hall");
+	}
+        refreshDetails(selectedHall, selectedAccommodation);
     }
 
 }

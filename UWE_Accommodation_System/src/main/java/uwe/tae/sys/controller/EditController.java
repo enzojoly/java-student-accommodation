@@ -22,6 +22,14 @@ public class EditController {
 
     Accommodation originalAccommodation;
 
+    private AccommodationType originalType;
+
+    private String originalDescription;
+
+    private String originalInventory;
+
+    private CleaningStatus originalCleaningStatus;
+
     Hall hall;
 
     Accommodation accommodation;
@@ -133,8 +141,10 @@ public class EditController {
    @FXML
     public void handleCancelAction() {
         // Revert any changes and close the window
-        hall = originalHall;
-        accommodation = originalAccommodation;
+	accommodation.setType(originalType);
+	accommodation.setDescription(originalDescription);
+	accommodation.setInventory(new ArrayList<>(Arrays.asList(originalInventory.split("\\s*,\\s*"))));
+	accommodation.setCleaningStatus(originalCleaningStatus);
 	updateCallback.onInformationUpdated(hall, accommodation);
         cancelWindow();
     }
@@ -191,13 +201,16 @@ public class EditController {
     public void passVariables(Hall hall, Accommodation accommodation) {
 	this.hall = hall;
 	this.accommodation = accommodation;
-	originalHall = hall; // create a deep copy of hall
-        originalAccommodation = accommodation; // create a deep copy of accommodation
+	this.originalHall = hall; // create a deep copy of hall
+	this.originalAccommodation = accommodation; // create a deep copy of accommodation
+	this.originalDescription = accommodation.getDescription();
+	this.originalInventory = String.join(", ", accommodation.getInventory());
+	this.originalType = accommodation.getType();
+	this.originalCleaningStatus = accommodation.getCleaningStatus();
 
-	if (accommodation != null) {
         	setTextFlowContent(displayAccommodationNumber, String.valueOf(accommodation.getID()));
 		setTextFlowContent(displaySelectedHall, hall.getName());
-	}
+
     }
 
     public void setUpdateCallback(InformationUpdateCallback updateCallback) {
