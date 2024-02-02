@@ -12,14 +12,13 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditController">
    <children>
       <VBox prefHeight="600.0" prefWidth="518.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Details" textAlignment="CENTER" wrappingWidth="412.66455078125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Accommodation Details" textAlignment="CENTER" wrappingWidth="412.66455078125">
                <font>
-                  <Font size="39.0" />
+                  <Font size="34.0" />
                </font>
                <VBox.margin>
                   <Insets left="60.0" right="20.0" top="15.0" />
@@ -60,66 +59,6 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TextFlow>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="20.0" layoutY="331.0" prefHeight="31.0" prefWidth="498.0">
-               <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager" textOrigin="TOP">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Text>
-                  <TextField fx:id="insertNewHallManagerName" prefWidth="600.0" promptText="Insert new hall manager name...">
-                     <HBox.margin>
-                        <Insets left="50.0" right="20.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="186.0" prefHeight="31.0" prefWidth="498.0">
-               <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager Tel." textOrigin="TOP">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Text>
-                  <TextField fx:id="insertNewHallManagerTelephone" prefWidth="600.0" promptText="Insert new hall manager telephone...">
-                     <HBox.margin>
-                        <Insets left="18.0" right="20.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="348.0" prefHeight="31.0" prefWidth="498.0">
-               <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" textOrigin="TOP">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Text>
-                  <TextField fx:id="insertNewHallManagerID" prefWidth="600.0" promptText="Insert new hall manager employee ID...">
-                     <HBox.margin>
-                        <Insets left="55.0" right="20.0" />
-                     </HBox.margin>
-                  </TextField>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -204,7 +143,7 @@
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
                   </Text>
-                  <Button fx:id="setDefaultInventory" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Set default" onAction="#handleDefaultInventory">
+                  <Button fx:id="setDefaultInventory" mnemonicParsing="false" onAction="#handleDefaultInventory" prefHeight="41.0" prefWidth="408.0" text="Set default">
                      <HBox.margin>
                         <Insets left="15.0" top="10.0" />
                      </HBox.margin>
@@ -232,7 +171,7 @@
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>
                   </Text>
-                  <Button fx:id="setDefaultDescription" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Set default" onAction="#handleDefaultDescription">
+                  <Button fx:id="setDefaultDescription" mnemonicParsing="false" onAction="#handleDefaultDescription" prefHeight="41.0" prefWidth="408.0" text="Set default">
                      <HBox.margin>
                         <Insets left="46.0" top="10.0" />
                      </HBox.margin>
@@ -252,12 +191,12 @@
             </HBox>
             <HBox layoutX="20.0" layoutY="315.0" prefHeight="31.0" prefWidth="498.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Cancel" onAction="#handleCancelAction">
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="41.0" prefWidth="408.0" text="Cancel">
                      <HBox.margin>
                         <Insets left="100.0" right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="confirmButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="408.0" text="Confirm" onAction="#handleConfirmAction">
+                  <Button fx:id="confirmButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleConfirmAction" prefHeight="41.0" prefWidth="408.0" text="Confirm">
                      <HBox.margin>
                         <Insets left="20.0" right="100.0" />
                      </HBox.margin>

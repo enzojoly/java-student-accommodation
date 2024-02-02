@@ -14,6 +14,7 @@ uwe/tae/sys/controller/InformationUpdateCallback.class
 uwe/tae/sys/model/Person.class
 uwe/tae/sys/model/OccupancyStatus.class
 uwe/tae/sys/model/AccommodationType$1.class
+uwe/tae/sys/controller/EditHallController.class
 uwe/tae/sys/model/StudentVillage.class
 uwe/tae/sys/model/AccommodationType.class
 uwe/tae/sys/model/CleaningStatus$1.class

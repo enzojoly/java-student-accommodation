@@ -55,7 +55,7 @@ public class Accommodation {
         }
     }
 
-     private boolean inventoryMatchesDefault() {
+     public boolean inventoryMatchesDefault() {
         List<String> defaultInventory = getDefaultInventoryForType(this.type);
         return this.inventory.equals(defaultInventory);
     }

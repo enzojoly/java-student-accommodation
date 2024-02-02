@@ -15,4 +15,5 @@
 /home/enzo/UWE/OOSD/Java Accommodation System/UWE_Accommodation_System/src/main/java/uwe/tae/sys/model/UWE_Accommodation_System.java
 /home/enzo/UWE/OOSD/Java Accommodation System/UWE_Accommodation_System/src/main/java/uwe/tae/sys/model/Person.java
 /home/enzo/UWE/OOSD/Java Accommodation System/UWE_Accommodation_System/src/main/java/uwe/tae/sys/model/Hall.java
+/home/enzo/UWE/OOSD/Java Accommodation System/UWE_Accommodation_System/src/main/java/uwe/tae/sys/controller/EditHallController.java
 /home/enzo/UWE/OOSD/Java Accommodation System/UWE_Accommodation_System/src/main/java/uwe/tae/sys/model/AccommodationType.java

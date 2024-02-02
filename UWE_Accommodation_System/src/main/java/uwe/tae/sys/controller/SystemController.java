@@ -3,6 +3,8 @@ package uwe.tae.sys.controller;
 import uwe.tae.sys.model.UWE_Accommodation_System;
 import uwe.tae.sys.model.Hall;
 import uwe.tae.sys.model.Accommodation;
+import uwe.tae.sys.model.AvailabilityStatus;
+import uwe.tae.sys.model.CleaningStatus;
 
 import java.util.List;
 
@@ -29,8 +31,19 @@ public class SystemController implements InformationUpdateCallback {
 
     private Accommodation selectedAccommodation;
 
+    private int totalRooms;
+
+    private int availableRooms;
+
+    private int offlineRooms;
+
+    private int requireCleaning;
+
     @FXML
     private ListView<String> displayInventoryList;
+
+    @FXML
+    private TextFlow defaultMatchInfo;
 
     @FXML
     private MenuButton selectBlock;
@@ -63,6 +76,18 @@ public class SystemController implements InformationUpdateCallback {
     private TextFlow displayHallManagerID;
 
     @FXML
+    private TextFlow displayTotalRooms;
+
+    @FXML
+    private TextFlow displayAvailableRooms;
+
+    @FXML
+    private TextFlow displayOfflineRooms;
+
+    @FXML
+    private TextFlow displayRequireCleaning;
+
+    @FXML
     private ListView<String> associatedAccommodationsListSelect;
 
     @FXML
@@ -93,6 +118,9 @@ public class SystemController implements InformationUpdateCallback {
     private TextFlow displayAssociatedLeaseNumber;
 
     @FXML
+    private Button editHallDetailsButton;
+
+    @FXML
     private Button editDetailsButton;
 
     @FXML
@@ -107,6 +135,7 @@ public class SystemController implements InformationUpdateCallback {
 	uweSystem = UWE_Accommodation_System.createSystem();
 
         selectHall.setDisable(true);
+	editHallDetailsButton.setDisable(true);
 	editDetailsButton.setDisable(true);
 	createLeaseButton.setDisable(true);
 	deleteLeaseButton.setDisable(true);
@@ -150,28 +179,81 @@ public class SystemController implements InformationUpdateCallback {
 	setTextFlowContent(displayHallManagerID, String.valueOf(hall.getManager().getID()));
 	selectedHall = hall;
 	updateAccommodationsList(hall);
-
+	editHallDetailsButton.setDisable(false);
 	editDetailsButton.setDisable(true);
+	createLeaseButton.setDisable(true);
+	deleteLeaseButton.setDisable(true);
+	//Null pointer exception for selectedAccommodation as on first boot refreshDetails is called before selectedAccommodation is set
+	try {
+		refreshDetails(selectedHall, selectedAccommodation);
+	} catch (NullPointerException e) {
+		System.out.println("Refreshed details. No accommodation selected");
+	}
     }
 
     private void updateAccommodationsList(Hall hall) {
 	associatedAccommodationsListSelect.getItems().clear();
+	totalRooms = 0;
+	availableRooms = 0;
+	offlineRooms = 0;
+	requireCleaning = 0;
 	for (Accommodation accommodation : hall.getAssociatedAccommodations()) {
+
+		// I call this monster the String maker, also it provides total variables for header display
+
 		String displayText = hall.getName() + ", " + accommodation.getID() + ", " + accommodation.getType();
-		associatedAccommodationsListSelect.getItems().add(displayText);
+		totalRooms++;
+
+		if (accommodation.getRentalAgreement() == null) {
+		if (accommodation.getCleaningStatus() == CleaningStatus.CLEAN) {
+			availableRooms++;
+			associatedAccommodationsListSelect.getItems().add(displayText);
+		} else if (accommodation.getCleaningStatus() == CleaningStatus.OFFLINE) {
+			offlineRooms++;
+			associatedAccommodationsListSelect.getItems().add(displayText + ", OFFLINE");
+		} else if (accommodation.getCleaningStatus() == CleaningStatus.DIRTY) {
+			requireCleaning++;
+			associatedAccommodationsListSelect.getItems().add(displayText + ", REQUIRES CLEANING");
+		}
+		} else if (accommodation.getRentalAgreement() != null) {
+			if (accommodation.getCleaningStatus() == CleaningStatus.CLEAN) {
+			associatedAccommodationsListSelect.getItems().add(displayText + ", Leased to "
+					+ accommodation.getRentalAgreement().getStudent().getID());
+
+		} else if (accommodation.getCleaningStatus() == CleaningStatus.OFFLINE) {
+			offlineRooms++;
+			associatedAccommodationsListSelect.getItems().add(displayText + ", Leased to "
+					+ accommodation.getRentalAgreement().getStudent().getID() + ", OFFLINE");
+		// Can a student occupy an offline room? Only if Offline triggered after occupation, apparently.
+
+		} else if (accommodation.getCleaningStatus() == CleaningStatus.DIRTY){
+			requireCleaning++;
+			associatedAccommodationsListSelect.getItems().add(displayText + ", Leased to "
+					+ accommodation.getRentalAgreement().getStudent().getID() + ", REQUIRES CLEANING");
+		}
 	}
-    }
+	}
+	}
 
     private void refreshDetails(Hall hall, Accommodation accommodation) {
+	    updateAccommodationsList(hall);
 	setTextFlowContent(displayHallManagerName, hall.getManager().getName());
 	setTextFlowContent(displayHallManagerTelephone, hall.getManager().getTelephone());
 	setTextFlowContent(displayHallManagerID, String.valueOf(hall.getManager().getID()));
+	setTextFlowContent(displayTotalRooms, String.valueOf(totalRooms));
+	setTextFlowContent(displayAvailableRooms, String.valueOf(availableRooms));
+	setTextFlowContent(displayOfflineRooms, String.valueOf(offlineRooms));
+	setTextFlowContent(displayRequireCleaning, String.valueOf(requireCleaning));
 	setTextFlowContent(displayAvailabilityStatus, (accommodation.getAvailabilityStatus().toString()));
 	setTextFlowContent(displayCleaningStatus, (accommodation.getCleaningStatus().toString()));
 	setTextFlowContent(displayAccommodationType, (accommodation.getType().toString()));
         setTextFlowContent(displayPrice, accommodation.getPrice());
 			   displayInventoryList.setItems(FXCollections.observableArrayList(accommodation.getInventory()));
 	setTextFlowContent(displayDescription, accommodation.getDescription());
+	printInventoryCode(accommodation);
+        editDetailsButton.setDisable(true);
+	createLeaseButton.setDisable(true);
+	deleteLeaseButton.setDisable(true);
 
 	// If the accommodation is not occupied, Write "N/A" in the student details fields
 	if (accommodation.getRentalAgreement() == null) {
@@ -188,6 +270,53 @@ public class SystemController implements InformationUpdateCallback {
 	}
     }
 
+    private void refreshOnSelect(Accommodation accommodation) {
+	setTextFlowContent(displayAvailabilityStatus, (accommodation.getAvailabilityStatus().toString()));
+	setTextFlowContent(displayCleaningStatus, (accommodation.getCleaningStatus().toString()));
+	setTextFlowContent(displayAccommodationType, (accommodation.getType().toString()));
+        setTextFlowContent(displayPrice, accommodation.getPrice());
+			   displayInventoryList.setItems(FXCollections.observableArrayList(accommodation.getInventory()));
+	setTextFlowContent(displayDescription, accommodation.getDescription());
+	printInventoryCode(accommodation);
+
+
+	// If the accommodation is not occupied, Write "N/A" in the student details fields
+	if (accommodation.getRentalAgreement() == null) {
+		setTextFlowContent(displayStudentName, "N/A");
+		setTextFlowContent(displayStudentID, "N/A");
+		setTextFlowContent(displayStudentTelephone, "N/A");
+		setTextFlowContent(displayAssociatedLeaseNumber, "N/A");
+		if (accommodation.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE) {
+		createLeaseButton.setDisable(false);
+		}
+		deleteLeaseButton.setDisable(true);
+		return;
+	} else {
+		setTextFlowContent(displayStudentName, accommodation.getRentalAgreement().getStudent().getName());
+		setTextFlowContent(displayStudentID, accommodation.getRentalAgreement().getStudent().getID());
+		setTextFlowContent(displayStudentTelephone, accommodation.getRentalAgreement().getStudent().getTelephone());
+		setTextFlowContent(displayAssociatedLeaseNumber, accommodation.getRentalAgreement().getLeaseNumber());
+		createLeaseButton.setDisable(true);
+		deleteLeaseButton.setDisable(false);
+	}
+    }
+
+
+    private void printInventoryCode(Accommodation accommodation) {
+
+	if (accommodation.inventoryMatchesDefault()) {
+	if (accommodation.getDescription() == accommodation.defaultDescriptionString()) {
+		setTextFlowContent(defaultMatchInfo, "Inventory up to code");
+	} else {
+		setTextFlowContent(defaultMatchInfo, "Description diverges from the norm.");
+	}
+	} else {
+		setTextFlowContent(defaultMatchInfo, "Inventory does not match requirements, OFFLINE");
+	}
+    }
+
+
+
     private void handleSelectAccommodation(String accommodationString) {
 
     	if (accommodationString == null) {
@@ -201,10 +330,8 @@ public class SystemController implements InformationUpdateCallback {
 	int accommodationID = Integer.parseInt(parts[1].replace(",", ""));
     	selectedAccommodation = findAccommodationById(accommodationID);
 
+	refreshOnSelect(selectedAccommodation);
 	editDetailsButton.setDisable(false);
-
-
-    	refreshDetails(selectedHall, selectedAccommodation);
 
     }
 
@@ -231,13 +358,25 @@ public class SystemController implements InformationUpdateCallback {
 
     @FXML
     private void handleEditDetailsAction() {
-    	onEditDetailsClicked(selectedAccommodation);
+    	onEditDetailsClicked(selectedHall, selectedAccommodation);
     }
 
     @FXML
-    private void onEditDetailsClicked(Accommodation accommodation) {
+    private void handleEditHallDetailsAction() {
+    	onEditHallDetailsClicked(selectedHall, selectedAccommodation);
+    }
+
+    @FXML
+    private void onEditDetailsClicked(Hall hall, Accommodation accommodation) {
 	    if (selectedAccommodation != null) {
-        	openEditWindow("/uwe/tae/sys/view/edit.fxml", "Edit Details", selectedHall, selectedAccommodation);
+        	openEditWindow("/uwe/tae/sys/view/edit.fxml", "Edit Accommodation Details", selectedHall, selectedAccommodation);
+	    }
+    }
+
+    @FXML
+    private void onEditHallDetailsClicked(Hall hall, Accommodation accommodation) {
+	    if (hall != null) {
+        	openEditHallWindow("/uwe/tae/sys/view/editHall.fxml", "Edit Hall Details", selectedHall, selectedAccommodation);
 	    }
     }
 
@@ -253,6 +392,9 @@ public class SystemController implements InformationUpdateCallback {
 	if (selectedAccommodation.getRentalAgreement() != null) {
 		selectedAccommodation.deleteRentalAgreement();
 		refreshDetails(selectedHall, selectedAccommodation);
+		createLeaseButton.setDisable(true);
+		deleteLeaseButton.setDisable(true);
+		editDetailsButton.setDisable(true);
 	} else { System.out.println("No lease to delete"); }
     }
 
@@ -269,6 +411,27 @@ public class SystemController implements InformationUpdateCallback {
 	    LeaseController leaseController = loader.getController();
 	    leaseController.passVariables(selectedHall, selectedAccommodation);
 	    leaseController.setUpdateCallback(this);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(title);
+            stage.setScene(new Scene(pane));
+            stage.showAndWait();
+	    refreshDetails(selectedHall, selectedAccommodation);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    private void openEditHallWindow(String fxmlFile, String title, Hall selectedHall, Accommodation selectedAccommodation) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Pane pane = loader.load();
+
+	    EditHallController editHallController = loader.getController();
+	    editHallController.passVariables(selectedHall, selectedAccommodation);
+	    editHallController.setUpdateCallback(this);
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

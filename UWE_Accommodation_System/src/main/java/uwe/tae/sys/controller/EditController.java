@@ -35,15 +35,6 @@ public class EditController {
     private TextFlow displayAccommodationNumber;
 
     @FXML
-    private TextField insertNewHallManagerName;
-
-    @FXML
-    private TextField insertNewHallManagerTelephone;
-
-    @FXML
-    private TextField insertNewHallManagerID;
-
-    @FXML
     private TextField insertNewPrice;
 
     @FXML
@@ -118,9 +109,6 @@ public class EditController {
 
     @FXML
     public void handleConfirmAction() {
-	updateHallManagerName();
-	updateHallManagerTelephone();
-    	updateHallManagerID();
     	updatePrice();
     	updateInventory();
     	updateDescription();
@@ -136,10 +124,7 @@ public class EditController {
 }
 
     private boolean isAnyFieldFilled() {
-	return 	!insertNewHallManagerName.getText().isEmpty() ||
-        	!insertNewHallManagerTelephone.getText().isEmpty() ||
-		!insertNewHallManagerID.getText().isEmpty() ||
-           	!insertNewPrice.getText().isEmpty() ||
+	return	!insertNewPrice.getText().isEmpty() ||
            	!insertNewInventory.getText().isEmpty() ||
            	!insertNewDescription.getText().isEmpty() ||
 		typeActive != null ||
@@ -156,21 +141,6 @@ public class EditController {
 
 // TO DO: 	Input Validation logic for each field
 //		individual fxml files for each detail to edit individually
-
-    private void updateHallManagerName() {
-	    if (!insertNewHallManagerName.getText().isEmpty())
-	hall.getManager().setName(insertNewHallManagerName.getText());
-	}
-
-    private void updateHallManagerTelephone() {
-	    if (!insertNewHallManagerTelephone.getText().isEmpty())
-	hall.getManager().setTelephone(insertNewHallManagerTelephone.getText());
-    }
-
-    private void updateHallManagerID() {
-	    if (!insertNewHallManagerID.getText().isEmpty())
-	hall.getManager().setID(insertNewHallManagerID.getText());
-    }
 
     private void updatePrice() {
 	    if (!insertNewPrice.getText().isEmpty())
