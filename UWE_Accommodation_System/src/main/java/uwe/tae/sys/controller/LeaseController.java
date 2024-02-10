@@ -51,20 +51,20 @@ public class LeaseController {
     @FXML
     public void handleConfirmAction() {
 //Testing
-	System.out.println("enterStudentName: " + (enterStudentName != null ? "Initialized" : "Not Initialized"));
-	System.out.println("enterStudentID: " + (enterStudentID != null ? "Initialized" : "Not Initialized"));
-	System.out.println("enterStudentTelephone: " + (enterStudentTelephone != null ? "Initialized" : "Not Initialized"));
+//	System.out.println("enterStudentName: " + (enterStudentName != null ? "Initialized" : "Not Initialized"));
+//	System.out.println("enterStudentID: " + (enterStudentID != null ? "Initialized" : "Not Initialized"));
+//	System.out.println("enterStudentTelephone: " + (enterStudentTelephone != null ? "Initialized" : "Not Initialized"));
 
 	if (enterStudentName == null || enterStudentID == null || enterStudentTelephone == null) {
             System.out.println("One or more fields are not initialized.");
             return;
-    }
+	}
 
 
-	if (enterStudentName.getText().isEmpty() || enterStudentID.getText().isEmpty() || enterStudentTelephone.getText().isEmpty()) {
-            System.out.println("Please fill all fields.");
-            return;
-        }
+//	if (enterStudentName.getText().isEmpty() || enterStudentID.getText().isEmpty() || enterStudentTelephone.getText().isEmpty()) {
+//            System.out.println("Please fill all fields.");
+//            return;
+//        }
 
         String studentName = enterStudentName.getText();
         String studentTelephone = enterStudentTelephone.getText();
