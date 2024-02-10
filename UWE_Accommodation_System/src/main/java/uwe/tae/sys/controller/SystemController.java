@@ -327,7 +327,7 @@ public class SystemController implements InformationUpdateCallback {
     private void printInventoryCode(Accommodation accommodation) {
 
 	if (accommodation.inventoryMatchesDefault()) {
-	if (accommodation.getDescription() == accommodation.defaultDescriptionString()) {
+	if (accommodation.descriptionMatchesDefault()) {
 		setTextFlowContent(defaultMatchInfo, "Inventory up to code");
 	} else {
 		setTextFlowContent(defaultMatchInfo, "Description diverges from the norm.");
