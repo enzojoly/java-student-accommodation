@@ -311,6 +311,9 @@ public class SystemController implements InformationUpdateCallback {
 		if (accommodation.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE) {
 		createLeaseButton.setDisable(false);
 		}
+		if (accommodation.getCleaningStatus() != CleaningStatus.CLEAN) {
+		createLeaseButton.setDisable(true);
+		}
 		deleteLeaseButton.setDisable(true);
 		return;
 	} else {
