@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.layout.HBox;
 
 public class LeaseController {
 
@@ -20,32 +21,59 @@ public class LeaseController {
     InformationUpdateCallback updateCallback;
 
     @FXML
-    private TextFlow displaySelectedHall;
+    private TextFlow displaySelectedHall, displayAccommodationNumber, displayPrice;
 
     @FXML
-    private TextFlow displayAccommodationNumber;
+    private TextField enterStudentName , enterStudentID, enterStudentTelephone;
 
     @FXML
-    private TextField enterStudentName;
+    private HBox enterStudentNameError, enterStudentIDError, enterStudentTelephoneError;
 
     @FXML
-    private TextField enterStudentID;
-
-    @FXML
-    private TextField enterStudentTelephone;
-
-    @FXML
-    private TextFlow displayPrice;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button confirmButton;
+    private Button cancelButton, confirmButton;
 
     // Initialize method
     @FXML
     private void initialize() {
+	setupValidation();
+        confirmButton.setDisable(true);
+    }
+
+    private void setupValidation() {
+	validateTextField(enterStudentName, "[a-zA-Z]+\\s[a-zA-Z]+", "Invalid name format.", enterStudentNameError);
+        validateTextField(enterStudentID, "\\d{8}", "ID must be 8 digits.", enterStudentIDError);
+        validateTextField(enterStudentTelephone, "^(\\+44\\s?7\\d{3}|\\(?\\d{4}\\)?\\s?\\d{6})$", "Invalid phone number.", enterStudentTelephoneError);
+    }
+
+    private void validateTextField(TextField textField, String pattern, String errorMessage, HBox container) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches(pattern) && !newValue.isEmpty()) {
+                if (textField.getStyleClass().indexOf("text-field-error") == -1) {
+                    textField.getStyleClass().add("text-field-error");
+                }
+                setErrorText(container, errorMessage);
+            } else {
+                textField.getStyleClass().remove("text-field-error");
+                setErrorText(container, null);
+            }
+            checkFormValidity();
+        });
+    }
+
+    private void setErrorText(HBox container, String errorMessage) {
+        container.getChildren().removeIf(node -> node instanceof Text); // Remove previous error messages
+        if (errorMessage != null) {
+            Text errorText = new Text(errorMessage);
+            errorText.getStyleClass().add("error-text");
+            container.getChildren().add(errorText);
+        }
+    }
+
+    private void checkFormValidity() {
+        boolean isValid = enterStudentName.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+") &&
+                          enterStudentID.getText().matches("\\d{8}") &&
+                          enterStudentTelephone.getText().matches("^(\\+44\\s?7\\d{3}|\\(?\\d{4}\\)?\\s?\\d{6})$");
+        confirmButton.setDisable(!isValid);
     }
 
     @FXML

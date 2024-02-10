@@ -86,9 +86,8 @@ public class EditController {
 
     @FXML
     private void initialize() {
-	    setupEventHandlers();
+	setupEventHandlers();
     }
-
 
     private void setupEventHandlers() {
 
