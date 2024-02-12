@@ -40,8 +40,8 @@ public class LeaseController {
     }
 
     private void setupValidation() {
-	validateTextField(enterStudentName, "[a-zA-Z]+\\s[a-zA-Z]+", "Invalid name format.", enterStudentNameError);
-        validateTextField(enterStudentID, "\\d{8}", "ID must be 8 digits.", enterStudentIDError);
+	validateTextField(enterStudentName, "^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$", "Invalid name entry. Please enter a name in the form 'John Doe', 'John D", enterStudentNameError);
+        validateTextField(enterStudentID, "^07\\d{9}$", "Invalid phone number. Must be 11 digits long, starting '07'", enterStudentIDError);
         validateTextField(enterStudentTelephone, "^(\\+44\\s?7\\d{3}|\\(?\\d{4}\\)?\\s?\\d{6})$", "Invalid phone number.", enterStudentTelephoneError);
     }
 

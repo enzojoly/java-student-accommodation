@@ -44,7 +44,7 @@ public class Accommodation {
         this.description = getDefaultDescriptionForType(this.type);
     }
 
-    private String getDefaultDescriptionForType(AccommodationType type) {
+    public String getDefaultDescriptionForType(AccommodationType type) {
         switch (type) {
             case STANDARD:
                 return "Standard Room with basic amenities";
@@ -66,7 +66,7 @@ public class Accommodation {
     }
 
 
-    private List<String> getDefaultInventoryForType(AccommodationType type) {
+    public List<String> getDefaultInventoryForType(AccommodationType type) {
         switch (type) {
             case STANDARD:
                 return Arrays.asList("Single bed", "Wardrobe", "Desk", "Chair", "Bookshelves", "Bedside cabinet", "Mirror", "En-suite wet room");

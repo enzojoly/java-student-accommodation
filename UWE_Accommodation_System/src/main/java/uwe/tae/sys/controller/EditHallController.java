@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
+import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
 
 public class EditHallController {
 
@@ -39,9 +41,58 @@ public class EditHallController {
     @FXML
     private Button confirmButton;
 
+
+    @FXML
+    private HBox enterHallManagerNameError, enterHallManagerTelephoneError, enterHallManagerIDError;
+
+    // Initialize method
     @FXML
     private void initialize() {
+        setupValidation();
+    }
 
+    private void setupValidation() {
+	    // Validate the manager's name: first and last name separated by a space
+	    validateTextField(insertNewHallManagerName, "^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$", "Invalid name entry. Please enter a name in the form 'John Doe', 'John D", enterHallManagerNameError);
+	    // Validate the telephone number: starts with "07" and is 11 digits long
+	    validateTextField(insertNewHallManagerTelephone, "^07\\d{9}$", "Invalid phone number. Must be 11 digits long, starting '07'", enterHallManagerTelephoneError);
+	    // Validate the manager ID: a 6-digit integer
+	    validateTextField(insertNewHallManagerID, "^\\d{6}$", "Invalid ID. Must be 6 digits long", enterHallManagerIDError);
+    }
+
+    private void validateTextField(TextField textField, String pattern, String errorMessage, HBox container) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            boolean matchesPattern = newValue.matches(pattern);
+            if (!matchesPattern && !newValue.isEmpty()) {
+                if (textField.getStyleClass().indexOf("text-field-error") == -1) {
+                    textField.getStyleClass().add("text-field-error");
+                }
+                setErrorText(container, errorMessage);
+            } else {
+                textField.getStyleClass().remove("text-field-error");
+                setErrorText(container, null);
+            }
+            checkFormValidity();
+        });
+    }
+
+    private void setErrorText(HBox container, String errorMessage) {
+        container.getChildren().removeIf(node -> node instanceof Text);
+        if (errorMessage != null) {
+            Text errorText = new Text(errorMessage);
+            errorText.getStyleClass().add("error-text");
+            container.getChildren().add(errorText);
+        }
+    }
+
+
+    private void checkFormValidity() {
+	    boolean isNameValid = insertNewHallManagerName.getText().isEmpty() || insertNewHallManagerName.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+");
+	    boolean isTelephoneValid = insertNewHallManagerTelephone.getText().isEmpty() || insertNewHallManagerTelephone.getText().matches("^07\\d{9}$"); // Corrected regex
+	    boolean isIDValid = insertNewHallManagerID.getText().isEmpty() || insertNewHallManagerID.getText().matches("^\\d{6}$"); // Corrected regex for a 6-digit ID
+
+	    // The confirm button should be enabled if all fields are valid (or empty for flexibility)
+	    confirmButton.setDisable(!(isNameValid && isTelephoneValid && isIDValid)); // Simplified condition
     }
 
     public void handleConfirmAction() {

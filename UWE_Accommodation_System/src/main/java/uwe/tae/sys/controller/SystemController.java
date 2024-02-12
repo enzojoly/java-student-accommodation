@@ -440,7 +440,6 @@ public class SystemController implements InformationUpdateCallback {
             Scene scene = new Scene(pane);
             String css = getClass().getResource("/uwe/tae/sys/css/styles.css").toExternalForm();
             scene.getStylesheets().add(css); // Adding the CSS file to the scene
-	    pane.getStyleClass().add("purple-background");
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -463,10 +462,14 @@ public class SystemController implements InformationUpdateCallback {
 	    editHallController.passVariables(selectedHall, selectedAccommodation);
 	    editHallController.setUpdateCallback(this);
 
+	    Scene scene = new Scene(pane);
+            String css = getClass().getResource("/uwe/tae/sys/css/styles.css").toExternalForm();
+            scene.getStylesheets().add(css); // Adding the CSS file to the scene
+
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(title);
-            stage.setScene(new Scene(pane));
+            stage.setScene(scene);
             stage.showAndWait();
 	    refreshDetails(selectedHall, selectedAccommodation);
         } catch (IOException e) {
@@ -484,10 +487,14 @@ public class SystemController implements InformationUpdateCallback {
 	    editController.passVariables(selectedHall, selectedAccommodation);
 	    editController.setUpdateCallback(this);
 
+	    Scene scene = new Scene(pane);
+            String css = getClass().getResource("/uwe/tae/sys/css/styles.css").toExternalForm();
+            scene.getStylesheets().add(css); // Adding the CSS file to the scene
+
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(title);
-            stage.setScene(new Scene(pane));
+            stage.setScene(scene);
             stage.showAndWait();
 	    refreshDetails(selectedHall, selectedAccommodation);
         } catch (IOException e) {

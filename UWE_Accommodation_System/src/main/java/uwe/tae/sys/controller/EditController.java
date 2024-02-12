@@ -15,12 +15,17 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.layout.HBox;
 
 public class EditController {
 
     Hall originalHall;
 
     Accommodation originalAccommodation;
+
+    //private String defaultInventory = String.join(", ", accommodation.getDefaultInventoryForType(accommodation.getType()));
+
+    //private String defaultDescription = accommodation.getDefaultDescriptionForType(accommodation.getType());
 
     private AccommodationType originalType;
 
@@ -37,56 +42,70 @@ public class EditController {
     InformationUpdateCallback updateCallback;
 
     @FXML
-    private TextFlow displaySelectedHall;
+    private HBox EnterPriceError, EnterInventoryError, EnterDescriptionError;
 
     @FXML
-    private TextFlow displayAccommodationNumber;
+    private TextFlow displaySelectedHall, displayAccommodationNumber;
 
     @FXML
-    private TextField insertNewPrice;
+    private TextField insertNewPrice, insertNewInventory, insertNewDescription;
 
     @FXML
-    private MenuButton setType;
+    private MenuButton setType, setStatus;
 
     @FXML
-    private MenuItem selectStandard;
+    private MenuItem selectStandard, selectSuperior, selectDirty, selectOffline, selectClean;
 
     @FXML
-    private MenuItem selectSuperior;
-
-    @FXML
-    private MenuButton setStatus;
-
-    @FXML
-    private MenuItem selectClean;
-
-    @FXML
-    private MenuItem selectDirty;
-
-    @FXML
-    private MenuItem selectOffline;
-
-    @FXML
-    private Button setDefaultInventory;
-
-    @FXML
-    private Button setDefaultDescription;
-
-    @FXML
-    private TextField insertNewInventory;
-
-    @FXML
-    private TextField insertNewDescription;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button confirmButton;
+    private Button setDefaultInventory, setDefaultDescription, cancelButton, confirmButton;
 
     @FXML
     private void initialize() {
 	setupEventHandlers();
+	setupValidation();
+	confirmButton.setDisable(true);
+    }
+
+    private void setupValidation() {
+	    validateTextField(insertNewPrice, "^\\d+(?:\\.\\d{1,2})?$", "Invalid price entry", EnterPriceError);
+            validateTextField(insertNewInventory, "a", "Inventory not standard. Status will be set to OFFLINE", EnterInventoryError);
+	    validateTextField(insertNewDescription, "a", "Description diverges from the norm", EnterDescriptionError);
+    }
+
+    private void validateTextField(TextField textField, String pattern, String errorMessage, HBox errorContainer) {
+	    textField.textProperty().addListener((observable, oldValue, newValue) -> {
+		    boolean matchesPattern = newValue.matches(pattern);
+		    if (!matchesPattern && !newValue.isEmpty()) {
+			    if (textField.getStyleClass().indexOf("text-field-error") == -1) {
+				    textField.getStyleClass().add("text-field-error");
+			    }
+			    setErrorText(errorContainer, errorMessage);
+		    } else {
+			    textField.getStyleClass().remove("text-field-error");
+			    setErrorText(errorContainer, null);
+		    }
+		    updateConfirmButtonState();
+	    });
+    }
+
+    private void setErrorText(HBox container, String errorMessage) {
+
+	    container.getChildren().removeIf(node -> node instanceof Text);
+	    if (errorMessage != null) {
+		    Text errorText = new Text(errorMessage);
+		    errorText.getStyleClass().add("error-text");
+		    container.getChildren().add(errorText);
+	    }
+    }
+
+    private void updateConfirmButtonState() {
+	    confirmButton.setDisable(!(isAnyFieldFilled() && isPriceNotInvalid()));
+    }
+
+    private boolean isPriceNotInvalid() {
+	    // Check if the price field is not invalid (it is either empty or matches the pattern)
+	    String price = insertNewPrice.getText();
+	    return price.isEmpty() || price.matches("^\\d+(?:\\.\\d{1,2})?$");
     }
 
     private void setupEventHandlers() {
@@ -105,12 +124,14 @@ public class EditController {
 	accommodation.setType(type);
 	accommodation.setDefaultsBasedOnType(type);
 	typeActive = "type changed";
+	updateConfirmButtonState();
     }
 
 
     public void handleSetCleaningStatus(CleaningStatus cleaningStatus) {
 	accommodation.setCleaningStatus(cleaningStatus);
 	cleaningActive = "status changed";
+	updateConfirmButtonState();
     }
 
 
@@ -136,8 +157,9 @@ public class EditController {
            	!insertNewDescription.getText().isEmpty() ||
 		typeActive != null ||
 		cleaningActive != null;
-}
-   @FXML
+	}
+
+    @FXML
     public void handleCancelAction() {
         // Revert any changes and close the window
 	accommodation.setType(originalType);

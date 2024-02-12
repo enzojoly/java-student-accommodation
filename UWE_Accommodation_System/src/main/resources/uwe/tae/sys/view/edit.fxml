@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditController">
    <children>
       <VBox prefHeight="600.0" prefWidth="518.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -82,6 +82,11 @@
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="EnterPriceError" layoutX="10.0" layoutY="146.0" prefHeight="24.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="175.0" right="30.0" />
                </VBox.margin>
             </HBox>
             <HBox layoutX="10.0" layoutY="410.0" prefHeight="31.0" prefWidth="498.0">
@@ -161,6 +166,11 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
+            <HBox fx:id="EnterInventoryError" layoutX="185.0" layoutY="172.0" prefHeight="22.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="200.0" right="20.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
             <HBox layoutX="10.0" layoutY="155.0" prefHeight="31.0" prefWidth="498.0">
                <children>
                   <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desc." textOrigin="TOP">
@@ -187,6 +197,11 @@
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="EnterDescriptionError" layoutX="185.0" layoutY="175.0" prefHeight="24.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="200.0" right="20.0" top="2.0" />
                </VBox.margin>
             </HBox>
             <HBox layoutX="20.0" layoutY="315.0" prefHeight="31.0" prefWidth="498.0">

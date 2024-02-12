@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditHallController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwe.tae.sys.controller.EditHallController">
    <children>
       <VBox prefHeight="600.0" prefWidth="518.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,9 +42,9 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox layoutX="20.0" layoutY="331.0" prefHeight="31.0" prefWidth="498.0">
+            <HBox layoutX="20.0" layoutY="331.0" prefHeight="0.0" prefWidth="518.0">
                <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager" textOrigin="TOP">
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Manager" textOrigin="TOP" wrappingWidth="101.7509765625">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -62,9 +62,14 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox layoutX="10.0" layoutY="186.0" prefHeight="31.0" prefWidth="498.0">
+            <HBox fx:id="enterHallManagerNameError" prefHeight="22.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="175.0" right="20.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="186.0" prefHeight="2.0" prefWidth="518.0">
                <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Tel." textOrigin="TOP">
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hall Tel." textOrigin="TOP" wrappingWidth="61.6376953125">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -82,9 +87,14 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox layoutX="10.0" layoutY="348.0" prefHeight="31.0" prefWidth="498.0">
+            <HBox fx:id="enterHallManagerTelephoneError" layoutX="10.0" layoutY="142.0" prefHeight="22.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="175.0" right="20.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="348.0" prefHeight="0.0" prefWidth="518.0">
                <children>
-                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager ID No." textOrigin="TOP">
+                  <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager ID No." textOrigin="TOP" wrappingWidth="119.408203125">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -92,7 +102,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Text>
-                  <TextField fx:id="insertNewHallManagerID" prefWidth="600.0" promptText="Insert new hall manager employee ID...">
+                  <TextField fx:id="insertNewHallManagerID" prefHeight="0.0" prefWidth="328.0" promptText="Insert new hall manager employee ID...">
                      <HBox.margin>
                         <Insets left="30.0" right="20.0" />
                      </HBox.margin>
@@ -100,6 +110,11 @@
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="enterHallManagerIDError" layoutX="10.0" layoutY="142.0" prefHeight="22.0" prefWidth="518.0">
+               <VBox.margin>
+                  <Insets left="175.0" right="20.0" top="2.0" />
                </VBox.margin>
             </HBox>
             <HBox layoutX="20.0" layoutY="315.0" prefHeight="31.0" prefWidth="498.0">
