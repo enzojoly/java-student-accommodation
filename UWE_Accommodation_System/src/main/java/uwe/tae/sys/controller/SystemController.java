@@ -121,21 +121,12 @@ public class SystemController implements InformationUpdateCallback {
     private TextFlow displayAssociatedLeaseNumber;
 
     @FXML
-    private Button editHallDetailsButton;
-
-    @FXML
-    private Button editDetailsButton;
-
-    @FXML
-    private Button createLeaseButton;
-
-    @FXML
-    private Button deleteLeaseButton;
+    private Button editHallDetailsButton, editDetailsButton, createLeaseButton, deleteLeaseButton;
 
     @FXML
     private void initialize() {
 
-	uweSystem = UWE_Accommodation_System.createSystem();
+	uweSystem = UWE_Accommodation_System.getSystem();
 
         selectHall.setDisable(true);
 	editHallDetailsButton.setDisable(true);

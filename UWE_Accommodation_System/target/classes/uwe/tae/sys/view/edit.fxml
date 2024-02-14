@@ -123,16 +123,21 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Text>
-                  <MenuButton fx:id="setStatus" mnemonicParsing="false" prefHeight="23.0" prefWidth="392.0" text="Set Status">
-                     <items>
-                        <MenuItem fx:id="selectClean" mnemonicParsing="false" text="Clean" />
-                        <MenuItem fx:id="selectDirty" mnemonicParsing="false" text="Dirty" />
-                        <MenuItem fx:id="selectOffline" mnemonicParsing="false" text="Offline" />
-                     </items>
+                  <Button fx:id="offlineButton" mnemonicParsing="false" onAction="#setStatusOffline" text="Offline">
                      <HBox.margin>
-                        <Insets left="28.0" right="20.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
-                  </MenuButton>
+                  </Button>
+                  <Button fx:id="dirtyButton" layoutX="148.0" layoutY="10.0" mnemonicParsing="false" onAction="#setStatusDirty" text="Dirty">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cleanButton" layoutX="204.0" layoutY="10.0" mnemonicParsing="false" onAction="#setStatusClean" text="Clean">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

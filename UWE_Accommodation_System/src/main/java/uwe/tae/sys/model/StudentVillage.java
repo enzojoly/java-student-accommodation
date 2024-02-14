@@ -49,4 +49,15 @@ public class StudentVillage {
 		.orElse(null);
     }
 
+    public Accommodation findAccommodationById(int id) {
+	    for (Hall hall : this.getHalls()) {
+		    for (Accommodation accommodation : hall.getAssociatedAccommodations()) {
+			    if (accommodation.getID() == id) {
+				    return accommodation;
+			    }
+		    }
+	    }
+    	    return null;
+    }
+
 }

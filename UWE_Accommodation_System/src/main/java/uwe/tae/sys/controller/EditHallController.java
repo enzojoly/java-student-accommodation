@@ -53,7 +53,7 @@ public class EditHallController {
 
     private void setupValidation() {
 	    // Validate the manager's name: first and last name separated by a space
-	    validateTextField(insertNewHallManagerName, "^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$", "Invalid name entry. Please enter a name in the form 'John Doe', 'John D", enterHallManagerNameError);
+	    validateTextField(insertNewHallManagerName, "^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$", "Please enter a valid name.", enterHallManagerNameError);
 	    // Validate the telephone number: starts with "07" and is 11 digits long
 	    validateTextField(insertNewHallManagerTelephone, "^07\\d{9}$", "Invalid phone number. Must be 11 digits long, starting '07'", enterHallManagerTelephoneError);
 	    // Validate the manager ID: a 6-digit integer
@@ -87,7 +87,7 @@ public class EditHallController {
 
 
     private void checkFormValidity() {
-	    boolean isNameValid = insertNewHallManagerName.getText().isEmpty() || insertNewHallManagerName.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+");
+	    boolean isNameValid = insertNewHallManagerName.getText().isEmpty() || insertNewHallManagerName.getText().matches("^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$");
 	    boolean isTelephoneValid = insertNewHallManagerTelephone.getText().isEmpty() || insertNewHallManagerTelephone.getText().matches("^07\\d{9}$"); // Corrected regex
 	    boolean isIDValid = insertNewHallManagerID.getText().isEmpty() || insertNewHallManagerID.getText().matches("^\\d{6}$"); // Corrected regex for a 6-digit ID
 

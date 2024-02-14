@@ -1,5 +1,6 @@
 package uwe.tae.sys.controller;
 
+import uwe.tae.sys.model.UWE_Accommodation_System;
 import uwe.tae.sys.model.Hall;
 import uwe.tae.sys.model.Accommodation;
 import uwe.tae.sys.model.AccommodationType;
@@ -16,16 +17,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.layout.HBox;
+import javafx.event.ActionEvent;
+
+//This class retroactively implements a singleton pattern to showcase the functionality of the design pattern
 
 public class EditController {
 
     Hall originalHall;
 
     Accommodation originalAccommodation;
-
-    //private String defaultInventory = String.join(", ", accommodation.getDefaultInventoryForType(accommodation.getType()));
-
-    //private String defaultDescription = accommodation.getDefaultDescriptionForType(accommodation.getType());
 
     private AccommodationType originalType;
 
@@ -57,19 +57,21 @@ public class EditController {
     private MenuItem selectStandard, selectSuperior, selectDirty, selectOffline, selectClean;
 
     @FXML
-    private Button setDefaultInventory, setDefaultDescription, cancelButton, confirmButton;
+    private Button setDefaultInventory, setDefaultDescription, offlineButton, dirtyButton, cleanButton, cancelButton, confirmButton;
 
     @FXML
     private void initialize() {
 	setupEventHandlers();
-	setupValidation();
 	confirmButton.setDisable(true);
+	offlineButton.setDisable(true);
+	dirtyButton.setDisable(true);
+	cleanButton.setDisable(true);
     }
 
     private void setupValidation() {
 	    validateTextField(insertNewPrice, "^\\d+(?:\\.\\d{1,2})?$", "Invalid price entry", EnterPriceError);
-            validateTextField(insertNewInventory, "a", "Inventory not standard. Status will be set to OFFLINE", EnterInventoryError);
-	    validateTextField(insertNewDescription, "a", "Description diverges from the norm", EnterDescriptionError);
+            validateTextField(insertNewInventory, String.join(", ", originalAccommodation.getDefaultInventoryForType(accommodation.getType())), "Inventory not standard. Status will be set to OFFLINE", EnterInventoryError);
+	    validateTextField(insertNewDescription, originalAccommodation.getDefaultDescriptionForType(accommodation.getType()), "Description diverges from the norm", EnterDescriptionError);
     }
 
     private void validateTextField(TextField textField, String pattern, String errorMessage, HBox errorContainer) {
@@ -89,7 +91,6 @@ public class EditController {
     }
 
     private void setErrorText(HBox container, String errorMessage) {
-
 	    container.getChildren().removeIf(node -> node instanceof Text);
 	    if (errorMessage != null) {
 		    Text errorText = new Text(errorMessage);
@@ -109,34 +110,76 @@ public class EditController {
     }
 
     private void setupEventHandlers() {
+	selectStandard.setOnAction(this::handleSetType);
+        selectSuperior.setOnAction(this::handleSetType);
+    }
 
-	selectStandard.setOnAction(e -> handleSetType(AccommodationType.STANDARD));
-	selectSuperior.setOnAction(e -> handleSetType(AccommodationType.SUPERIOR));
-	selectClean.setOnAction(e -> handleSetCleaningStatus(CleaningStatus.CLEAN));
-	selectDirty.setOnAction(e -> handleSetCleaningStatus(CleaningStatus.DIRTY));
-	selectOffline.setOnAction(e -> handleSetCleaningStatus(CleaningStatus.OFFLINE));
+
+        private void updateStatusButtons() {
+	if (accommodation.getCleaningStatus() == CleaningStatus.CLEAN) {
+		cleanButton.setDisable(true);
+		dirtyButton.setDisable(false);
+		offlineButton.setDisable(false);
+	} else if (accommodation.getCleaningStatus() == CleaningStatus.DIRTY) {
+		dirtyButton.setDisable(true);
+		cleanButton.setDisable(false);
+		offlineButton.setDisable(false);
+	} else if (accommodation.getCleaningStatus() == CleaningStatus.OFFLINE) {
+		offlineButton.setDisable(true);
+		dirtyButton.setDisable(false);
+		cleanButton.setDisable(true);
+	}
+
+    }
+
+    @FXML
+    private void setStatusOffline() {
+	    handleSetCleaningStatus(CleaningStatus.OFFLINE);
+    }
+
+    @FXML
+    private void setStatusDirty() {
+	    handleSetCleaningStatus(CleaningStatus.DIRTY);
+    }
+
+    @FXML
+    private void setStatusClean() {
+	    handleSetCleaningStatus(CleaningStatus.CLEAN);
     }
 
     String typeActive;
     String cleaningActive;
+    //handle type set to change menuButton display text
+    @FXML
+    private void handleSetType(ActionEvent event) {
+	    if (event.getSource() instanceof MenuItem) {
+		    MenuItem selectedMenuItem = (MenuItem) event.getSource();
+		    String selectedType = selectedMenuItem.getText();
+		    setType.setText(selectedType); // Update the MenuButton text to reflect the selected type
 
-    public void handleSetType(AccommodationType type) {
-	accommodation.setType(type);
-	accommodation.setDefaultsBasedOnType(type);
-	typeActive = "type changed";
-	updateConfirmButtonState();
+		    if ("Standard".equals(selectedType)) {
+			    accommodation.setType(AccommodationType.STANDARD);
+		    } else if ("Superior".equals(selectedType)) {
+			    accommodation.setType(AccommodationType.SUPERIOR);
+		    }
+			    typeActive = "type changed";
+
+		    updateConfirmButtonState();
+		    setupValidation();
+	    }
     }
 
 
-    public void handleSetCleaningStatus(CleaningStatus cleaningStatus) {
+    private void handleSetCleaningStatus(CleaningStatus cleaningStatus) {
 	accommodation.setCleaningStatus(cleaningStatus);
 	cleaningActive = "status changed";
 	updateConfirmButtonState();
+	updateStatusButtons();
     }
 
 
     @FXML
-    public void handleConfirmAction() {
+    private void handleConfirmAction() {
     	updatePrice();
     	updateInventory();
     	updateDescription();
@@ -160,7 +203,7 @@ public class EditController {
 	}
 
     @FXML
-    public void handleCancelAction() {
+    private void handleCancelAction() {
         // Revert any changes and close the window
 	accommodation.setType(originalType);
 	accommodation.setDescription(originalDescription);
@@ -223,21 +266,24 @@ public class EditController {
 	this.hall = hall;
 	this.accommodation = accommodation;
 	this.originalHall = hall; // create a deep copy of hall
-	this.originalAccommodation = accommodation; // create a deep copy of accommodation
+	//Implemented singleton
+	this.originalAccommodation = UWE_Accommodation_System.getSystem().getStudentVillage().findAccommodationById(accommodation.getID()); // create a deep copy of accommodation
 	this.originalDescription = accommodation.getDescription();
 	this.originalInventory = String.join(", ", accommodation.getInventory());
 	this.originalType = accommodation.getType();
 	this.originalCleaningStatus = accommodation.getCleaningStatus();
 
-        	setTextFlowContent(displayAccommodationNumber, String.valueOf(accommodation.getID()));
-		setTextFlowContent(displaySelectedHall, hall.getName());
+	setTextFlowContent(displayAccommodationNumber, String.valueOf(accommodation.getID()));
+	setTextFlowContent(displaySelectedHall, hall.getName());
 
+	updateStatusButtons();
+
+	setupValidation();
     }
 
     public void setUpdateCallback(InformationUpdateCallback updateCallback) {
         this.updateCallback = updateCallback;
     }
-
 
 
 }
