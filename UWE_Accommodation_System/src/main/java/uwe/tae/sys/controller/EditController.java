@@ -173,8 +173,8 @@ public class EditController {
     private void handleSetCleaningStatus(CleaningStatus cleaningStatus) {
 	accommodation.setCleaningStatus(cleaningStatus);
 	cleaningActive = "status changed";
-	updateConfirmButtonState();
 	updateStatusButtons();
+	updateConfirmButtonState();
     }
 
 
@@ -264,7 +264,7 @@ public class EditController {
 
     public void passVariables(Hall hall, Accommodation accommodation) {
 	this.hall = hall;
-	this.accommodation = accommodation;
+	this.accommodation = UWE_Accommodation_System.getSystem().getStudentVillage().findAccommodationById(accommodation.getID());
 	this.originalHall = hall; // create a deep copy of hall
 	//Implemented singleton
 	this.originalAccommodation = UWE_Accommodation_System.getSystem().getStudentVillage().findAccommodationById(accommodation.getID()); // create a deep copy of accommodation
