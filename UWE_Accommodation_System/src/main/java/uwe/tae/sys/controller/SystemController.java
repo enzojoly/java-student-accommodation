@@ -266,6 +266,8 @@ public class SystemController implements InformationUpdateCallback {
 	createLeaseButton.setDisable(true);
 	deleteLeaseButton.setDisable(true);
 
+	reselectUpdatedAccommodation(accommodation);
+
 	// If the accommodation is not occupied, Write "N/A" in the student details fields
 	if (accommodation.getRentalAgreement() == null) {
 		setTextFlowContent(displayStudentName, "N/A");
@@ -280,6 +282,12 @@ public class SystemController implements InformationUpdateCallback {
 		setTextFlowContent(displayAssociatedLeaseNumber, accommodation.getRentalAgreement().getLeaseNumber());
 	}
 	}
+    }
+
+    private void reselectUpdatedAccommodation(Accommodation accommodation) {
+	selectedAccommodation = accommodation;
+	refreshOnSelect(selectedAccommodation);
+	editDetailsButton.setDisable(false);
     }
 
     private void refreshOnSelect(Accommodation accommodation) {

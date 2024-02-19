@@ -41,8 +41,8 @@ public class LeaseController {
 
     private void setupValidation() {
 	validateTextField(enterStudentName, "^[A-Z][a-z]*+\\s[A-Z][a-z]*(?:-[A-Z][a-z]*)*$", "Invalid name entry. Please enter a name in the form 'John Doe', 'John D", enterStudentNameError);
-        validateTextField(enterStudentID, "^07\\d{9}$", "Invalid phone number. Must be 11 digits long, starting '07'", enterStudentIDError);
-        validateTextField(enterStudentTelephone, "^(\\+44\\s?7\\d{3}|\\(?\\d{4}\\)?\\s?\\d{6})$", "Invalid phone number.", enterStudentTelephoneError);
+        validateTextField(enterStudentID, "^\\d{8}$", "Invalid ID. Must be 8 digits long", enterStudentIDError);
+        validateTextField(enterStudentTelephone, "^07\\d{9}$", "Invalid phone number. Must be 11 digits long, starting '07'", enterStudentTelephoneError);
     }
 
     private void validateTextField(TextField textField, String pattern, String errorMessage, HBox container) {
@@ -72,7 +72,7 @@ public class LeaseController {
     private void checkFormValidity() {
         boolean isValid = enterStudentName.getText().matches("[a-zA-Z]+\\s[a-zA-Z]+") &&
                           enterStudentID.getText().matches("\\d{8}") &&
-                          enterStudentTelephone.getText().matches("^(\\+44\\s?7\\d{3}|\\(?\\d{4}\\)?\\s?\\d{6})$");
+                          enterStudentTelephone.getText().matches("^07\\d{9}$");
         confirmButton.setDisable(!isValid);
     }
 
